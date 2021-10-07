@@ -25,6 +25,7 @@
         - ZCSPM Environment <ZCSPM Environment>
         - ZCSPM License Id <Find in "Manage Licenses" of ZCSPM Settings>
         - ZCSPM Account Id List <Find in "Manage Accounts" of ZCSPM Settings>
+        - ZCSPM Benchmark Id <ZCSPM Supported Benchmarks>
         - ZCSPM Application Id
         - ZCSPM Application Secret
         - ZCSPM API Key <Find in "ZCSPM API Management Portal">
@@ -46,6 +47,16 @@
 	PS> .\Generate-AuditReport.ps1  `
         -ZCSPMEnvironment "trial" `
         -ZCSPMLicenseId "<ZCSPM License Id>" `
+        -ZCSPMApplicationId "<ZCSPM API application Id>" `
+        -ZCSPMApplicationSecret "<ZCSPM API application secret>" `
+        -ZCSPMAPIKey "<ZCSPM API primary key>"
+
+.EXAMPLE
+    By Default, the script will take CSBP as Benchmark ID unless specified by -ZCSPMBenchmarkId parameter
+	PS> .\Generate-AuditReport.ps1  `
+        -ZCSPMEnvironment "trial" `
+        -ZCSPMLicenseId "<ZCSPM License Id>" `
+        -ZCSPMBenchmarkId "HIPAA" `
         -ZCSPMApplicationId "<ZCSPM API application Id>" `
         -ZCSPMApplicationSecret "<ZCSPM API application secret>" `
         -ZCSPMAPIKey "<ZCSPM API primary key>"
@@ -299,10 +310,11 @@ function Add-Csv {
 
 # ZCSPM API Domain
 $ZCSPMApiDomain = @{
-    dev   = "devapi.cloudneeti.com";
+    dev   = "devapi.cloudneeti-devops.com";
     trial = "trialapi.cloudneeti.com";
-    qa    = "qaapi.cloudneeti.com";
+    qa    = "qaapi.cloudneeti-devops.com";
     prod  = "api.cloudneeti.com"
+    prod1 = "api1.cloudneeti.com"
 }
 $ApiDomain = $ZCSPMApiDomain[$ZCSPMEnvironment.ToLower()]
 
